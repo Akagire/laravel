@@ -20,7 +20,7 @@ Route::get('hello', function () {
 });
 
 
-Route::get('hello2/{msg?}', function ($msg = 'hoge') { 
+Route::get('hello2/{msg?}', function ($msg = 'hoge') {
   $html = <<< EOM
   <html>
   <head>
@@ -38,3 +38,5 @@ Route::get('hello2/{msg?}', function ($msg = 'hoge') {
 EOM;
   return $html;
 });
+
+Route::get('hello3', 'HelloController@index');
