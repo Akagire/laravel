@@ -14,11 +14,12 @@
   </style>
 </head>
 <body>
-  <h1>Index</h1>
-  <p><?php echo $msg; ?></p>
-  <p><?php echo $hoge; ?></p>
-  <p><?php echo date("Y年m月j日"); ?></p>
-  <p><?php echo $id; ?></p>
-  <p><?php echo $pass; ?></p>
+  <h1>Blade/Index</h1>
+  <p>{{$msg}}</p>
+  <form method="POST" action="/hello">
+    {{ csrf_field() }}
+    <input type="text" name="msg">
+    <input type="submit">
+  </form>
 </body>
 </html>
