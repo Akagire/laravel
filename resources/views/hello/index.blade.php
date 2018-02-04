@@ -20,6 +20,8 @@
 
 
   @include('components.message', ['msg_title'=>'OK','msg_content'=>'サブビュー'])
+
+  @each('components.item', $data, 'item')
 @endsection
 
 @section('footer')
