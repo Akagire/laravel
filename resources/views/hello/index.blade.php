@@ -1,25 +1,27 @@
-<html>
-<head>
-  <title>Hello/Index</title>
-  <style>
-  body {
-    font-size:16pt; color:#999;
-  }
-  h1 {
-    font-size: 100pt;
-    text-align:right;
-    color:#eee;
-    margin:-40px 0px -50px 0px;
-  }
-  </style>
-</head>
-<body>
-  <h1>Blade/Index</h1>
-  <p>{{$msg}}</p>
-  <form method="POST" action="/hello">
-    {{ csrf_field() }}
-    <input type="text" name="msg">
-    <input type="submit">
-  </form>
-</body>
-</html>
+@extends('layouts.helloapp')
+
+@section('title', 'Index')
+
+@section('menubar')
+  @parent
+  インデックスページ
+@endsection
+
+@section('content')
+  <p>ここが本文</p>
+
+  @component('components.message')
+    @slot('msg_title')CAUTION!@endslot
+
+    @slot('msg_content')
+    これはメッセージ表示
+    @endslot
+  @endcomponent
+
+
+  @include('components.message', ['msg_title'=>'OK','msg_content'=>'サブビュー'])
+@endsection
+
+@section('footer')
+copyleft 2018 Akagire.
+@endsection
