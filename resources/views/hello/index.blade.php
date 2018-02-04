@@ -22,6 +22,9 @@
   @include('components.message', ['msg_title'=>'OK','msg_content'=>'サブビュー'])
 
   @each('components.item', $data, 'item')
+
+  <p>Controller value: 'message' = {{$message}}</p>
+  <p>View Composer value: 'view_message' = {{$view_message}}</p>
 @endsection
 
 @section('footer')

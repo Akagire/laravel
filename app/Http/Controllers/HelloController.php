@@ -14,7 +14,7 @@ class HelloController extends Controller
         ['name'=>'さちこ', 'mail'=>'sachi@happy'],
       ];
 
-      return view('hello.index', ['data'=>$data]);
+      return view('hello.index', ['data'=>$data, 'message'=>'Hello!']);
 
     }
 
