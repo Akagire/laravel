@@ -3,18 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-USE Illuminate\Http\Response;
+use Illuminate\Http\Response;
 
 class HelloController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
       $data = [
         ['name'=>'たろう', 'mail'=>'taro@yamada'],
         ['name'=>'はなこ', 'mail'=>'hana@flower'],
         ['name'=>'さちこ', 'mail'=>'sachi@happy'],
       ];
 
-      return view('hello.index', ['data'=>$data, 'message'=>'Hello!']);
+      return view('hello.index', [
+        //'data'=>$request->data,
+        'data_old'=>$data,
+        'message'=>'Hello!',
+      ]);
 
     }
 
