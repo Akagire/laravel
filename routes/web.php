@@ -21,3 +21,6 @@ use App\Http\Middleware\HelloMiddleware;
 Route::get('hello', 'HelloController@index')
     ->middleware('halo');
 Route::post('hello', 'HelloController@post');
+
+Route::get('validation', 'HelloController@val');
+Route::post('validation', 'HelloController@post');

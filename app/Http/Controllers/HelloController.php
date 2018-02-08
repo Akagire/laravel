@@ -22,4 +22,21 @@ class HelloController extends Controller
 
     }
 
+    public function val(Request $request)
+    {
+        return view('hello.validate',['msg'=>'フォームを入力']);
+    }
+
+    public function post(Request $request)
+    {
+        $validate_rule = [
+            'name' => 'required',
+            'mail' => 'email',
+            'age' => 'numeric|between:0,120',
+        ];
+
+        $this->validate($request, $validate_rule);
+        return view('hello.validate', ['msg'=>'正しく入力されました！']);
+    }
+
 }
