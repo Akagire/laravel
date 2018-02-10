@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+use App\Http\Requests\HelloRequest;
+use Validator;
+
 class HelloController extends Controller
 {
     public function index(Request $request) {
@@ -24,18 +27,54 @@ class HelloController extends Controller
 
     public function val(Request $request)
     {
-        return view('hello.validate',['msg'=>'フォームを入力']);
+        /*
+        $validator = Validator::make($request->query(), [
+            'id' => 'required',
+            'pass' => 'required',
+        ]);
+        if($validator->fails()){
+            $msg = 'クエリに問題があります';
+        } else {
+            $msg = 'ID/PASSを受け付けました。';
+        }
+        */
+        return view('hello.validate',['msg'=>'フォームを入力してね']);
     }
 
-    public function post(Request $request)
+    public function post(HelloRequest $request)
     {
-        $validate_rule = [
+        /*
+        $rules = [
             'name' => 'required',
             'mail' => 'email',
-            'age' => 'numeric|between:0,120',
+            'age' => 'numeric',
         ];
 
-        $this->validate($request, $validate_rule);
+        $messages = [
+            'name.required' => '名前は必ず入力してください',
+            'mail.email' => 'メールアドレスが正しくありません',
+            'age.numeric' => '年齢は数値で入力してください',
+            // 'age.between' => '年齢は0~120の間で入力してください',
+            'age.min' => '年齢は0歳以上で入力してください',
+            'age.max' => '年齢は120歳以下で入力してください',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        $validator->sometimes('age', 'min:0', function($input){
+            return !is_int($input->age);
+        });
+        $validator->sometimes('age', 'min:120', function($input){
+            return !is_int($input->age);
+        });
+
+        if ($validator->fails()){
+            return redirect('/validation')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        */
+
         return view('hello.validate', ['msg'=>'正しく入力されました！']);
     }
 
