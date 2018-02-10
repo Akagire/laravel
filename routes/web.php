@@ -24,3 +24,6 @@ Route::post('hello', 'HelloController@post');
 
 Route::get('validation', 'HelloController@val');
 Route::post('validation', 'HelloController@post');
+
+Route::get('cookie', 'HelloController@cookieEntry');
+Route::post('cookie', 'HelloController@cookiePost');

@@ -41,6 +41,38 @@ class HelloController extends Controller
         return view('hello.validate',['msg'=>'フォームを入力してね']);
     }
 
+    public function cookieEntry(Request $request)
+    {
+        if ($request->hasCookie('msg'))
+        {
+            $msg = 'Cookie: ' . $request->cookie('msg');
+        } else {
+            $msg = '※Cookieなし';
+        }
+
+        return view('hello.cookie',['msg'=>$msg]);
+    }
+
+    public function cookiePost(Request $request)
+    {
+        $validateRule = [
+            'msg' => 'required',
+        ];
+        $validateMessage = [
+            'msg.required' => 'メッセージは必ず入力してね',
+        ];
+
+        $this->validate($request, $validateRule);
+
+        $msg = $request->msg;
+
+        /* Cookieの保存はResponseインスタンスへ
+        $response = new Response(view('hello.cookie', ['msg'=>'Cookieに' . $msg . 'を保存しました']));
+        $response->cookie('msg', $msg, 100);
+
+        return $response;
+    }
+
     public function post(HelloRequest $request)
     {
         /*
