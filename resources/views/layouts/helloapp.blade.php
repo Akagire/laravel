@@ -36,6 +36,24 @@
       border-bottom: 1px;
       color: #ccc;
     }
+    th {
+        background-color: #999;
+        color: #fff;
+        padding: 5px 10px;
+    }
+    td {
+        border: solid 1px #aaa;
+        color: #999;
+        padding: 5px 10px;
+    }
+    a {
+        font-size: 10pt;
+        color: #555;
+        text-decoration: underline;
+    }
+    a:hover {
+        text-decoration: none;
+    }
     </style>
   </head>
   <body>
