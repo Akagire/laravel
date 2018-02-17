@@ -115,16 +115,24 @@ class HelloController extends Controller
     public function dbCon(Request $request)
     {
         /*
-        $items = DB::select('select * from people;');
-        return view('hello.dbcon', ['items' => $items]);
-        */
-
         if (isset($request->id)){
             //$param = ['id' => $request->id];
             $items = DB::select('select * from people where id = :id', ['id' => $request->id]);
         } else {
             $items = DB::select('select * from people');
         }
+        */
+        if (isset($request->page)){
+            $pageParView = 3;
+            $page = $request->page - 1;
+            $items = DB::table('people')
+                        ->offset($page * $pageParView)
+                        ->limit($pageParView)
+                        ->get();
+        } else {
+            $items = DB::table('people')->orderBy('id', 'asc')->get();
+        }
+
         return view('hello.dbcon', ['items' => $items]);
     }
 
@@ -135,13 +143,18 @@ class HelloController extends Controller
 
     public function dbInsert(Request $request)
     {
+
         $param = [
             'name' => $request->name,
             'mail' => $request->mail,
             'age' => $request->age,
         ];
 
+        /*
         DB::insert('insert into people (name, mail, age) values (:name, :mail, :age)', $param);
+        */
+        DB::table('people')->insert($param);
+
         return redirect('/dbcon');
     }
 
@@ -159,13 +172,14 @@ class HelloController extends Controller
     public function dbUpdate(Request $request)
     {
         $param = [
-            'id' => $request->id,
+            /*'id' => $request->id,*/
             'name' => $request->name,
             'mail' => $request->mail,
             'age' => $request->age,
         ];
 
-        DB::update('update people set name = :name, mail = :mail, age = :age where id = :id', $param);
+        //DB::update('update people set name = :name, mail = :mail, age = :age where id = :id', $param);
+        DB::table('people')->where('id', $request->id)->update($param);
         return redirect('/dbcon');
     }
 
@@ -182,8 +196,37 @@ class HelloController extends Controller
 
     public function dbDelete(Request $request)
     {
-        DB::delete('delete from people where id = :id', ['id' => $request->id]);
+        /* DB::delete('delete from people where id = :id', ['id' => $request->id]); */
+        DB::table('people')->where('id', $request->id)->delete();
         return redirect('/dbcon');
+    }
+
+    public function dbShow(Request $request)
+    {
+        if (!isset($request->id)){
+            return redirect('/dbcon');
+        }
+
+        $id = $request->id;
+        $item = DB::table('people')->where('id', $id)->first();
+
+        return view('hello.show', ['items' => ['items' => $item]]);
+    }
+
+    public function dbShows(Request $request)
+    {
+        if (!isset($request->min) and !isset($request->max)){
+            return redirect('/dbcon');
+        }
+
+        //$id = $request->id;
+        //$items = DB::table('people')->where('id', '<=', $id)->get();
+        $min = $request->min;
+        $max = $request->max;
+
+        $items = DB::table('people')->whereRaw('age BETWEEN  ? AND ?', [$min, $max])->get();
+
+        return view('hello.show', ['items' => $items]);
     }
 
 }

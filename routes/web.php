@@ -35,3 +35,5 @@ Route::get('dbcon/edit', 'HelloController@dbEdit');
 Route::post('dbcon/edit', 'HelloController@dbUpdate');
 Route::get('dbcon/del', 'HelloController@dbRemove');
 Route::post('dbcon/del', 'HelloController@dbDelete');
+Route::get('dbcon/show', 'HelloController@dbShow');
+Route::get('dbcon/shows', 'HelloController@dbShows');

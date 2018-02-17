@@ -15,6 +15,7 @@
         <td>{{$item->name}}</td>
         <td>{{$item->mail}}</td>
         <td>{{$item->age}}</td>
+        <td><a href="/dbcon/show?id={{$item->id}}">確認</a>
         <td><a href="/dbcon/edit?id={{$item->id}}">修正</a>
         <td><a href="/dbcon/del?id={{$item->id}}">削除</a>
     </tr>
