@@ -37,3 +37,5 @@ Route::get('dbcon/del', 'HelloController@dbRemove');
 Route::post('dbcon/del', 'HelloController@dbDelete');
 Route::get('dbcon/show', 'HelloController@dbShow');
 Route::get('dbcon/shows', 'HelloController@dbShows');
+
+Route::get('person', 'PersonController@index');
