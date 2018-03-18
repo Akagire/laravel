@@ -9,8 +9,9 @@
 
 @section('content')
 <table>
-    <tr><th>Name</th><th>Mail</th><th>Age</th></tr>
+    <tr><th>Data</th></tr>
     @foreach ($items as $item)
+        {{--
     <tr>
         <td>{{$item->name}}</td>
         <td>{{$item->mail}}</td>
@@ -18,6 +19,12 @@
         <td><a href="/person/show?id={{$item->id}}">確認</a>
         <td><a href="/person/edit?id={{$item->id}}">修正</a>
         <td><a href="/person/del?id={{$item->id}}">削除</a>
+    </tr>
+    --}}
+    <tr>
+        <td>{{$item->getData()}}</td>
+        <td><a href="/person/edit?id={{ $item->id }}">修正</a></td>
+        <td><a href="/person/del?id={{ $item->id }}">削除</a></td>
     </tr>
     @endforeach
     <tr>
